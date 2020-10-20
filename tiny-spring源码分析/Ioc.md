@@ -47,6 +47,7 @@ public class BeanDefinition {
 	private String beanClassName;
 
 	private PropertyValues propertyValues = new PropertyValues();
+    //<string, object>
     /*
     	...
     */
@@ -242,11 +243,34 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
 
 #### 模板方法模式
 
-该模式大量使用，例如在 `BeanFactory` 中，把 `getBean()` 交给子类实现，不同的子类 `**BeanFactory` 对其可以采取不同的实现。
+该模式大量使用，例如在 `BeanFactory` 中，把 `getBean()` 交给子类实现，不同的子类 `BeanFactory` 对其可以采取不同的实现。
 
 #### 代理模式
 
 在 tiny-spring 中（Spring 中也有类似但不完全相同的实现方式），`ApplicationContext` 继承了 `BeanFactory` 接口，具备了 `getBean()` 功能，但是又内置了一个 `BeanFactory` 实例，`getBean()` 直接调用 `BeanFactory` 的 `getBean()` 。但是`ApplicationContext` 加强了 `BeanFactory`，它把类定义的加载也包含进去了。
+
+### 流程概述
+
+#### BeanFactory
+
+1. `doCreateBean` ：实例化 `Bean`。
+   a. `createInstance` ：生成一个新的实例。
+   b. `applyProperties` ：注入属性，包括依赖注入的过程。
+2. `initializeBean(bean)` ： 初始化 `Bean`。
+   a. 从 `BeanPostProcessor` 列表中，依次取出 `BeanPostProcessor` 执行 `bean = postProcessBeforeInitialization(bean,beanName)` 。
+   b. 初始化方法（tiny-spring 未实现对初始化方法的支持）。
+   c. 从 `BeanPostProcessor` 列表中， 依次取出 `BeanPostProcessor` 执行其 `bean = postProcessAfterInitialization(bean,beanName)`。
+
+#### ApplicationContext
+
+`ApplicationContext` 的核心方法是 `refresh()` 方法，用于从资源文件加载类定义、扩展容器的功能。
+
+`refresh` 的流程：
+
+1. `loadBeanDefinitions(BeanFactory)` ：加载类定义，并注入到内置的 `BeanFactory` 中，这里的可扩展性在于，**未对加载方法进行要求，也就是可以从不同来源的不同类型的资源进行加载**。
+2. `registerBeanPostProcessors(BeanFactory)` ：获取所有的 `BeanPostProcessor`，并注册到 `BeanFactory` 维护的 `BeanPostProcessor` 列表去。
+3. `onRefresh` ：
+   a. `preInstantiateSingletons` ：以单例的方式，初始化所有 `Bean`。tiny-spring 只支持 `singleton` 模式。
 
 
 
