@@ -179,7 +179,8 @@ BeanFactory采用懒加载 ApplicationContext会在启动后实例化所有Bean�
 ##### Bean的实例化
 
 - 反射或cglib动态字节码生成为手段根据bean定义返回bean实例
-- 用BeanWrapper对对象实例进行包裹（设置属性值），返回对应的BeanWrapper实例
+- 用BeanWrapper对对象实例进行包裹以统一方式访问，并进行类型转换和设置属性值，返回对应的BeanWrapper实例
+- BeanWrapper借助于propertyEditor完成转换对象类型，设置属性值工作
 
 ##### Aware接口
 
@@ -223,12 +224,60 @@ ByteArray、ClassPath、FileSystem、URL、InputStream
 
 ![image-20201021163440355](D:\huangchenhong\note\java_learn\Spring揭秘读书笔记\第一部分_Spring的IOC容器.assets\image-20201021163440355.png)
 
+![image-20201022093603863](D:\huangchenhong\note\java_learn\Spring揭秘读书笔记\第一部分_Spring的IOC容器.assets\image-20201022093603863.png)
+
 - ApplicationContext继承自ResourcePatternResolver
-- AbstractApplicationContext继承自defaultResourceLoader
+- AbstractApplicationContext继承自DefaultResourceLoader
 - AbstractApplicationContext有一个PathMatchingResourcePatternResolver实例
 - PathMatchingResourcePatternResolver实例在传ResourceLoader的时候即指定传入自己
+
+以此同时实现了ResourceLoader和ResourcePatternResolver，即实现了**资源统一加载**
+
+**对比BeanFactory**：通过不同的BeanDefinitionReader实现类来加载资源
 
 #### 对外表现
 
 - 可作为ResourceLoader使用
-- 
+- 需要注入ResourceLoader的Bean可通过实现ResourceLoaderAware或者ApplicationContextAware接口，直接将ApplicationContext自身注入
+- 可以实现Resource类型的依赖注入：注册ResourceEditor
+- ClassPathXmlApplicationContext 默认从classPath查找资源  FileSystemXmlApplicationContext 默认从文件系统查找
+
+### 国际化信息支持
+
+
+
+### 事件发布
+
+#### javaSE的事件发布
+
+
+
+#### Spring的事件发布
+
+##### 相关类
+
+- ApplicationEvent：Spring容器自定义事件类型，有ContextClosedEvent，ContextRefreshedEvent等
+- ApplicationListener：ApplicationContext容器在启动时，会自动识别并加载EventListener类型bean定义， 一旦容器内有事件发布，将通知这些注册到容器的EventListener。
+- ApplicationContext
+  - 继承了ApplicationEventPublisher接口，承担事件发布者的角色
+  - 并不亲自做，交给内部实现了ApplicationEventMulticaster接口的实现类来做
+
+##### 具体使用
+
+让对象支持事件发布，首先向目标对象注入实现了ApplicationEventPublisher的实例，即ApplicationContext本身
+
+- 对象使用ApplicationEventPublisherAware接口
+- 对象实现ApplicationContextAware接口
+
+最后将该对象和Listener注入到ApplicationContext中
+
+### 多配置模块加载的简化
+
+可通过通配符路径或是String路径数组同时加载多个资源
+
+### 基于注解的自动绑定
+
+注解的实质是注册了BeanPostProcessor类型的Bean
+
+### 将革命进行得更彻底一些（classpath-scanning 功能介绍）
+
