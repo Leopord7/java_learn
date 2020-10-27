@@ -209,21 +209,22 @@ public interface MethodMatcher {
         //
         public class PerformanceMethodInterceptor implements MethodInterceptor {
          	private final Log logger = LogFactory.getLog(this.getClass());
+            
          	public Object invoke(MethodInvocation invocation) throws Throwable {
-         	StopWatch watch = new StopWatch();
-         	try{
-         		watch.start();
-         		return invocation.proceed();
+                StopWatch watch = new StopWatch();
+                try{
+                    watch.start();
+                    return invocation.proceed();
+                }
+                finally
+                {
+                    watch.stop();
+                    if(logger.isInfoEnabled())
+                    {
+                        logger.info(watch.toString());
+                    }
+                }
          	}
-         	finally
-         	{
-         		watch.stop();
-         		if(logger.isInfoEnabled())
-         		{
-         			logger.info(watch.toString());
-         		}
-         	}
-         }
         }
         ```
 
@@ -239,9 +240,62 @@ public interface IntroductionInterceptor extends MethodInterceptor, DynamicIntro
 
 #### PointCutAdvisor
 
+![image-20201023110219114](D:\huangchenhong\note\java_learn\Spring揭秘读书笔记\第三部分_Spring AOP 框架.assets\image-20201023110219114.png)
+
+- DefaultPointcutAdvisor：常规设定PointCut与Advisor
+- NameMatchMethodPointcutAdvisor：限制了为PointCut为NameMatchMethodPointCut
+- RegexpMethodPointcutAdvisor：正则表达式设置PoinetCut
+
+#### IntroductionAdvisor
+
+只能作类级别的匹配，只能使用Introduction型Advice
+
+#### Ordered
+
+当多个Advisor的PointCut匹配到同一处JoinPoint时，执行的先后顺序问题
+
+### 织入
+
+#### 各类织入器
+
+- AspectJ：ajc编译器
+- JBoss：自定义的ClassLoader
+- Spring AOP：类org.springframework.aop.framework.ProxyFactory（最基本的）
+
+![image-20201023140348517](D:\huangchenhong\note\java_learn\Spring揭秘读书笔记\第三部分_Spring AOP 框架.assets\image-20201023140348517.png)
 
 
 
+![image-20201023140822420](D:\huangchenhong\note\java_learn\Spring揭秘读书笔记\第三部分_Spring AOP 框架.assets\image-20201023140822420.png)
+
+#### 自动代理
+
+AutoProxyCreator
 
 
 
+## 第十章 Sping AOP二世
+
+### @AspectJ形式的AOP
+
+#### 特点
+
+使用POJO声明Aspect和相关的Advice
+
+新的PointCut表述方式
+
+#### 使用
+
+- 编写POJO
+    - 编程方式注入
+    - xml自动代理注入：
+
+
+
+## 第十一章 AOP应用案例
+
+### 异常
+
+
+
+### 缓存

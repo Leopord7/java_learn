@@ -194,6 +194,10 @@ BeanFactory采用懒加载 ApplicationContext会在启动后实例化所有Bean�
 - 字节码增强
 - 生成代理对象
 
+<img src="D:\huangchenhong\note\java_learn\Spring揭秘读书笔记\第二部分_Spring的IOC容器.assets\image-20201027122006620.png" alt="image-20201027122006620" style="zoom:67%;" />
+
+<img src="D:\huangchenhong\note\java_learn\Spring揭秘读书笔记\第二部分_Spring的IOC容器.assets\image-20201027122019340.png" alt="image-20201027122019340" style="zoom:67%;" />
+
 ##### InitializingBean和init-method
 
 在BeanPostProcessor的前置处理后
