@@ -35,6 +35,39 @@
 
 
 
+## 第二十五章 认识更多成员
+
+### Handler与HandlerAdapter
+
+#### 含义
+
+dispatchservlet如何知道调用什么类型的Handler，调用Handler的哪个方法？
+
+不同Handler的调用职责转交给HandlerAdapter
+
+```java
+public interface HandlerAdapter {
+ boolean supports(Object handler);
+ ModelAndView handle(HttpServletRequest request, HttpServletResponse response, ➥
+ Object handler) throws Exception;
+ long getLastModified(HttpServletRequest request, Object handler);
+} 
+```
+
+DispatcherServlet从HandlerMapping获得一个Handler之后，将询问 HandlerAdaptor的supports(..)方法，以便了解当前HandlerAdaptor是否支持HandlerMapping刚刚返回的Handler类型的调用。如果supports(..)返回true，DispatcherServlet 则 调用 HandlerAdaptor的handle(..)方法，同时将刚才的Handler作为参数传入。方法执行后将返回 ModelAndView，之后的工作就由ViewResolver接手了。
+
+DispatchServlet不需要面对众多不同类的Handler了，Adapter起到了隔离作用
+
+### 框架内处理流程拦截与HandlerInterceptor
+
+#### 含义
+
+HandlerExecutionChain就是一个数据载体，它包含了两方面的数据，一个就是用于处 理Web请求的Handler，另一个则是一组随同Handler一起返回的HandlerInterceptor。
+
+#### 归属
+
+HandlerInterceptor→HandlerExecutionChain→HandlerMapping的顺序溯源而上，HandlerMapping的setInterceptors方法
+
 
 
 ## 第二十六章 基于注解开发
