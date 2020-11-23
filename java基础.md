@@ -209,3 +209,17 @@ class DateInter extends Pair<Date> {
 
 由于泛型擦除，Pair中类仍为object，为解决会生成桥方法。
 
+## 注解
+
+见[链接](https://www.runoob.com/w3cnote/java-annotation.html)
+
+
+
+
+
+
+
+
+
+
+

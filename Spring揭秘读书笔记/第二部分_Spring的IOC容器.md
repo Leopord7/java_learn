@@ -133,7 +133,11 @@ FactoryBean是Spring容器提供的一种可以扩展容器对象实例化逻辑
 
 ![image-20201021143531855](D:\huangchenhong\note\java_learn\Spring揭秘读书笔记\第一部分_Spring的IOC容器.assets\image-20201021143531855.png)
 
+
+
 ![image-20201021143536941](D:\huangchenhong\note\java_learn\Spring揭秘读书笔记\第一部分_Spring的IOC容器.assets\image-20201021143536941.png)
+
+NextDayDateDisplayer所声明的依赖dateOfNextDay的类型为DateTime，而不是 NextDayDateFactoryBean。也就是说FactoryBean类型的bean定义，通过正常的id引用，容器返回 的是FactoryBean所“生产”的对象类型，而非FactoryBean实现本身。
 
 ### 偷梁换柱
 
