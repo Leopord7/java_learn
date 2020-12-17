@@ -116,7 +116,7 @@ public boolean equals(Object o) {
 
 ### StringBuffer StringBuilder
 
-StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。后者速度快但线程不安全
+StringBuffer 和 StringBuilder  类的对象能够被多次的修改，并且不产生新的未使用对象。后者速度快但线程不安全
 
 ### String对象不可变
 
