@@ -12,7 +12,7 @@ C字符串只会作为字面量用在一些不需要对值修改的地方，如�
 
 #### SDS定义
 
-![image-20201029171025078](D:\huangchenhong\note\java_learn\Redis设计与实现读书笔记\Redis设计与实现读书笔记.assets\image-20201029171025078.png)
+![image-20201029171025078](Redis设计与实现读书笔记.assets\image-20201029171025078.png)
 
 可以直接重用C的字符函数
 
@@ -37,9 +37,9 @@ C字符串只会作为字面量用在一些不需要对值修改的地方，如�
 
 #### 基本实现
 
-<img src="D:\huangchenhong\note\java_learn\Redis设计与实现读书笔记\Redis设计与实现读书笔记.assets\image-20201029182514015.png" alt="image-20201029182514015" style="zoom:80%;" />
+<img src="Redis设计与实现读书笔记.assets\image-20201029182514015.png" alt="image-20201029182514015" style="zoom:80%;" />
 
-<img src="D:\huangchenhong\note\java_learn\Redis设计与实现读书笔记\Redis设计与实现读书笔记.assets\image-20201029182527137.png" alt="image-20201029182527137" style="zoom:80%;" />
+<img src="Redis设计与实现读书笔记.assets\image-20201029182527137.png" alt="image-20201029182527137" style="zoom:80%;" />
 
 (void*)实现多态
 
@@ -51,7 +51,7 @@ C字符串只会作为字面量用在一些不需要对值修改的地方，如�
 
 #### 数据结构
 
-<img src="D:\huangchenhong\note\java_learn\Redis设计与实现读书笔记\Redis设计与实现读书笔记.assets\image-20201030092219475.png" alt="image-20201030092219475" style="zoom:80%;" />
+<img src="Redis设计与实现读书笔记.assets\image-20201030092219475.png" alt="image-20201030092219475" style="zoom:80%;" />
 
 
 
@@ -97,11 +97,11 @@ MurmurHash算法
 
 一系列特殊编码的连续内存块组成的顺序型数据结构
 
-<img src="D:\huangchenhong\note\java_learn\Redis设计与实现读书笔记\Redis设计与实现读书笔记.assets\image-20201030101107484.png" alt="image-20201030101107484" style="zoom:80%;" />
+<img src="Redis设计与实现读书笔记.assets\image-20201030101107484.png" alt="image-20201030101107484" style="zoom:80%;" />
 
 #### 节点的构成
 
-<img src="D:\huangchenhong\note\java_learn\Redis设计与实现读书笔记\Redis设计与实现读书笔记.assets\image-20201030101230331.png" alt="image-20201030101230331" style="zoom:80%;" />
+<img src="Redis设计与实现读书笔记.assets\image-20201030101230331.png" alt="image-20201030101230331" style="zoom:80%;" />
 
 - 前一节点的长度（以此可以从链表尾节点遍历至头节点，即当前头地址-前一节点长度）
 - 数据类型及长度
@@ -123,7 +123,7 @@ Redis并不直接使用之前的数据结构来实现键值对数据库，而是
 
 ##### 类型
 
-<img src="D:\huangchenhong\note\java_learn\Redis设计与实现读书笔记\Redis设计与实现读书笔记.assets\image-20201030103127468.png" alt="image-20201030103127468" style="zoom:67%;" />
+<img src="Redis设计与实现读书笔记.assets\image-20201030103127468.png" alt="image-20201030103127468" style="zoom:67%;" />
 
 字符串键：值为字符串
 
@@ -307,9 +307,7 @@ BGSAVE 派生子进程创建
 
 #### RDB文件结构
 
-![image-20201101092134676](D:\huangchenhong\note\java_learn\Redis设计与实现读书笔记\Redis设计与实现读书笔记.assets\image-20201101092134676.png)
-
-
+![image-20201101092134676](Redis设计与实现读书笔记.assets\image-20201101092134676.png)
 
 
 
