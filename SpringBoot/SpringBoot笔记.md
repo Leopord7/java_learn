@@ -35,3 +35,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=
 ```
 
 从 classpath 中搜寻所有 META-INF/spring.factories 配置文件，并将其中 org.spring-framework.boot.autoconfigure.EnableAutoConfiguration 对应的配置项通过反射（Java Reflection）实例化为对应的标注了 @Configuration 的 JavaConfig 形式的 IoC 容器配置类，然后汇总为一个并加载到 IoC 容器。
+
+## 事务传播行为
+
+requires,supports,mandatory,requires_new,not_supported,never,nested

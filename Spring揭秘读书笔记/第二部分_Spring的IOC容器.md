@@ -160,7 +160,7 @@ NextDayDateDisplayer所声明的依赖dateOfNextDay的类型为DateTime，而不
 分为容器启动阶段和Bean实例化阶段
 
 - xml/property -->  beanDefinition --> beanRegistry
-- getBean --> 创建实例 --> 诸如依赖
+- getBean --> 创建实例 --> 注入依赖
 
 #### 插手容器启动
 

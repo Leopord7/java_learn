@@ -119,7 +119,7 @@ Redis并不直接使用之前的数据结构来实现键值对数据库，而是
 
 新创建键值对时，至少创建了一个键对象和值对象
 
-<img src="D:\huangchenhong\note\java_learn\Redis设计与实现读书笔记\Redis设计与实现读书笔记.assets\image-20201030102844055.png" alt="image-20201030102844055" style="zoom:80%;" />
+<img src="Redis设计与实现读书笔记.assets\image-20201030102844055.png" alt="image-20201030102844055" style="zoom:80%;" />
 
 ##### 类型
 
@@ -485,6 +485,10 @@ SLAVEOF命令使一个服务器变为另一个主服务器的从服务器，两�
 - D（持久性)：只有在AOF的appendfsync设置为always才有持久性
 
     
+
+# 经典面试题
+
+
 
 
 
